@@ -1,0 +1,541 @@
+<robot name = "midnight">
+
+	<link name = "torso">
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.7"/>
+			<inertia ixx = "0" ixy = "0" ixz = "0" iyy = "0" iyz = "0" izz = "0" />
+		</inertial>
+		
+		<visual>
+			<geometry>
+				<mesh filename="Torso_meshed.stl" scale="0.005 0.005 0.005"/>
+			</geometry>
+			<material name = "orange">
+				<color rgba = "1 0.3 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0.4 1 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size = "1.25 1.6 0.38"/> 
+			</geometry>
+		</collision>
+		
+	</link>
+	
+	<link name = "motor_1">
+	
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.3"/>
+			<inertia ixx = "189.354" ixy = "0" ixz = "0" iyy = "189.354" iyz = "0" izz = "368.205" />
+		</inertial>
+		
+		<visual>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/> #45mm x 32mm x 23mm
+			</geometry>
+			<material name = "black">
+				<color rgba = "0 0 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/>
+			</geometry>
+		</collision>
+		
+	</link>
+	
+	<link name = "upper_leg1">
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.1"/>
+			<inertia ixx = "0" ixy = "0" ixz = "0" iyy = "0" iyz = "0" izz = "0" />
+		</inertial>
+
+		<visual>
+			<geometry>
+				<mesh filename="Upper_Leg_mesh.stl" scale="0.005 0.005 0.005"/>  #51 mm x 40 mm
+			</geometry>
+			<material name = "blue">
+				<color rgba = "0 0 1 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<cylinder radius = "0.2" length = "0.255"/> 
+			</geometry>
+		</collision>
+		
+	</link>
+	
+	<joint name = "joint11" type = "fixed">
+		<parent link = "torso" />
+		<child link = "motor_1" />
+		<origin xyz = "-0.1 0.3 0" rpy = "0 0 0" />
+	</joint>
+	
+	<link name = "motor1">
+	
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.3"/>
+			<inertia ixx = "189.354" ixy = "0" ixz = "0" iyy = "189.354" iyz = "0" izz = "368.205" />
+		</inertial>
+		
+		<visual>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/> #45mm x 32mm x 23mm
+			</geometry>
+			<material name = "black">
+				<color rgba = "0 0 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/>
+			</geometry>
+		</collision>
+		
+	</link>
+	
+	<joint name = "joint12" type = "fixed">
+		<parent link = "upper_leg1" />
+		<child link = "motor1" />
+		<origin xyz = "0 -0.06 -0.18" rpy = "0 0 0" />
+	</joint>
+	
+	<link name = "lower_leg1">
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.1"/>
+			<inertia ixx = "0" ixy = "0" ixz = "0" iyy = "0" iyz = "0" izz = "0" />
+		</inertial>
+
+		<visual>
+			<geometry>
+				<mesh filename="Lower_Leg_mesh.stl" scale="0.005 0.005 0.005"/> #116 mm x 20 mm
+			</geometry>
+			<material name = "green">
+				<color rgba = "0 1 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<cylinder radius = "0.1" length = "1"/> 
+			</geometry>
+		</collision>
+	</link>
+	
+	<joint name = "joint13" type = "revolute">
+		<parent link = "motor1" />
+		<child link = "lower_leg1" />
+		<limit upper = "1.6" lower = "-1.6"/>
+		<origin xyz = "0 0.05 -0.2" rpy = "0 0 3.14" />
+		<axis xyz = "1 0 0" />
+	</joint>
+	
+	<joint name = "joint14" type = "revolute">
+		<parent link = "motor_1" />
+		<child link = "upper_leg1" />
+		<limit upper = "1.6" lower = "-1.6"/>
+		<origin xyz = "0 0.05 -0.2" rpy = "0 0 0" />
+		<axis xyz = "1 0 0" />
+	</joint>
+	
+	<link name = "motor_2">
+	
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.3"/>
+			<inertia ixx = "189.354" ixy = "0" ixz = "0" iyy = "189.354" iyz = "0" izz = "368.205" />
+		</inertial>
+		
+		<visual>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/> #45mm x 32mm x 23mm
+			</geometry>
+			<material name = "black">
+				<color rgba = "0 0 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/>
+			</geometry>
+		</collision>
+		
+	</link>
+	
+	<link name = "upper_leg2">
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.1"/>
+			<inertia ixx = "0" ixy = "0" ixz = "0" iyy = "0" iyz = "0" izz = "0" />
+		</inertial>
+
+		<visual>
+			<geometry>
+				<mesh filename="Upper_Leg.stl" scale="0.005 0.005 0.005"/>
+			</geometry>
+			<material name = "blue">
+				<color rgba = "0 0 1 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<cylinder radius = "0.2" length = "0.255"/> 
+			</geometry>
+		</collision>
+	</link>
+	
+	<joint name = "joint21" type = "fixed">
+		<parent link = "torso" />
+		<child link = "motor_2" />
+		<origin xyz = "0.9 0.3 0" rpy = "0 0 0" />
+	</joint>
+	
+	<link name = "motor2">
+	
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.3"/>
+			<inertia ixx = "189.354" ixy = "0" ixz = "0" iyy = "189.354" iyz = "0" izz = "368.205" />
+		</inertial>
+		
+		<visual>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/> #45mm x 32mm x 23mm
+			</geometry>
+			<material name = "black">
+				<color rgba = "0 0 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/>
+			</geometry>
+		</collision>
+		
+	</link>
+	
+	<joint name = "joint22" type = "fixed">
+		<parent link = "upper_leg2" />
+		<child link = "motor2" />
+		<origin xyz = "0 -0.06 -0.18" rpy = "0 0 0" />
+	</joint>
+	
+	<link name = "lower_leg2">
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.1"/>
+			<inertia ixx = "0" ixy = "0" ixz = "0" iyy = "0" iyz = "0" izz = "0" />
+		</inertial>
+
+		<visual>
+			<geometry>
+				<mesh filename="Lower_Leg.stl" scale="0.005 0.005 0.005"/>
+			</geometry>
+			<material name = "green">
+				<color rgba = "0 1 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<cylinder radius = "0.1" length = "1"/> 
+			</geometry>
+		</collision>
+	</link>
+	
+	<joint name = "joint23" type = "revolute">
+		<parent link = "motor2" />
+		<child link = "lower_leg2" />
+		<limit upper = "1.6" lower = "-1.6"/>
+		<origin xyz = "0 0.05 -0.2" rpy = "0 0 3.14" />
+		<axis xyz = "1 0 0" />
+	</joint>
+	
+	<joint name = "joint24" type = "revolute">
+		<parent link = "motor_2" />
+		<child link = "upper_leg2" />
+		<limit upper = "1.6" lower = "-1.6"/>
+		<origin xyz = "0 0.05 -0.2" rpy = "0 0 0" />
+		<axis xyz = "1 0 0" />
+	</joint>
+	
+	<link name = "motor_3">
+	
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.3"/>
+			<inertia ixx = "189.354" ixy = "0" ixz = "0" iyy = "189.354" iyz = "0" izz = "368.205" />
+		</inertial>
+		
+		<visual>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/> #45mm x 32mm x 23mm
+			</geometry>
+			<material name = "black">
+				<color rgba = "0 0 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/>
+			</geometry>
+		</collision>
+		
+	</link>
+	
+	<link name = "upper_leg3">
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.1"/>
+			<inertia ixx = "0" ixy = "0" ixz = "0" iyy = "0" iyz = "0" izz = "0" />
+		</inertial>
+
+		<visual>
+			<geometry>
+				<mesh filename="Upper_Leg.stl" scale="0.005 0.005 0.005"/>
+			</geometry>
+			<material name = "blue">
+				<color rgba = "0 0 1 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<cylinder radius = "0.2" length = "0.255"/> 
+			</geometry>
+		</collision>
+	</link>
+	
+	<joint name = "joint31" type = "fixed">
+		<parent link = "torso" />
+		<child link = "motor_3" />
+		<origin xyz = "-0.1 1.5 0" rpy = "0 0 0" />
+	</joint>
+	
+	<link name = "motor3">
+	
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.3"/>
+			<inertia ixx = "189.354" ixy = "0" ixz = "0" iyy = "189.354" iyz = "0" izz = "368.205" />
+		</inertial>
+		
+		<visual>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/> #45mm x 32mm x 23mm
+			</geometry>
+			<material name = "black">
+				<color rgba = "0 0 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/>
+			</geometry>
+		</collision>
+		
+	</link>
+	
+	<joint name = "joint32" type = "fixed">
+		<parent link = "upper_leg3" />
+		<child link = "motor3" />
+		<origin xyz = "0 -0.06 -0.18" rpy = "0 0 0" />
+	</joint>
+	
+	<link name = "lower_leg3">
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.1"/>
+			<inertia ixx = "0" ixy = "0" ixz = "0" iyy = "0" iyz = "0" izz = "0" />
+		</inertial>
+
+		<visual>
+			<geometry>
+				<mesh filename="Lower_Leg.stl" scale="0.005 0.005 0.005"/>
+			</geometry>
+			<material name = "green">
+				<color rgba = "0 1 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<cylinder radius = "0.1" length = "1"/> 
+			</geometry>
+		</collision>
+	</link>
+	
+	<joint name = "joint33" type = "revolute">
+		<parent link = "motor3" />
+		<child link = "lower_leg3" />
+		<limit upper = "1.6" lower = "-1.6"/>
+		<origin xyz = "0 0.05 -0.2" rpy = "0 0 3.14" />
+		<axis xyz = "1 0 0" />
+	</joint>
+	
+	<joint name = "joint34" type = "revolute">
+		<parent link = "motor_3" />
+		<child link = "upper_leg3" />
+		<limit upper = "1.6" lower = "-1.6"/>
+		<origin xyz = "0 0.05 -0.2" rpy = "0 0 0" />
+		<axis xyz = "1 0 0" />
+	</joint>
+	
+	<link name = "motor_4">
+	
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.3"/>
+			<inertia ixx = "189.354" ixy = "0" ixz = "0" iyy = "189.354" iyz = "0" izz = "368.205" />
+		</inertial>
+		
+		<visual>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/> #45mm x 32mm x 23mm
+			</geometry>
+			<material name = "black">
+				<color rgba = "0 0 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/>
+			</geometry>
+		</collision>
+		
+	</link>
+	
+	<link name = "upper_leg4">
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.1"/>
+			<inertia ixx = "0" ixy = "0" ixz = "0" iyy = "0" iyz = "0" izz = "0" />
+		</inertial>
+
+		<visual>
+			<geometry>
+				<mesh filename="Upper_Leg.stl" scale="0.005 0.005 0.005"/>
+			</geometry>
+			<material name = "blue">
+				<color rgba = "0 0 1 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<cylinder radius = "0.2" length = "0.255"/> 
+			</geometry>
+		</collision>
+	</link>
+	
+	<joint name = "joint41" type = "fixed">
+		<parent link = "torso" />
+		<child link = "motor_4" />
+		<origin xyz = "0.9 1.5 0" rpy = "0 0 0" />
+	</joint>
+	
+	<link name = "motor4">
+	
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.3"/>
+			<inertia ixx = "189.354" ixy = "0" ixz = "0" iyy = "189.354" iyz = "0" izz = "368.205" />
+		</inertial>
+		
+		<visual>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/> #45mm x 32mm x 23mm
+			</geometry>
+			<material name = "black">
+				<color rgba = "0 0 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size = "0.16 0.115 0.225"/>
+			</geometry>
+		</collision>
+		
+	</link>
+	
+	<joint name = "joint42" type = "fixed">
+		<parent link = "upper_leg4" />
+		<child link = "motor4" />
+		<origin xyz = "0 -0.06 -0.18" rpy = "0 0 0" />
+	</joint>
+	
+	<link name = "lower_leg4">
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = "0.1"/>
+			<inertia ixx = "0" ixy = "0" ixz = "0" iyy = "0" iyz = "0" izz = "0" />
+		</inertial>
+
+		<visual>
+			<geometry>
+				<mesh filename="Lower_Leg.stl" scale="0.005 0.005 0.005"/>
+			</geometry>
+			<material name = "green">
+				<color rgba = "0 1 0 1"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<cylinder radius = "0.1" length = "1"/> 
+			</geometry>
+		</collision>
+	</link>
+	
+	<joint name = "joint43" type = "revolute">
+		<parent link = "motor4" />
+		<child link = "lower_leg4" />
+		<limit upper = "1.6" lower = "-1.6"/>
+		<origin xyz = "0 0.05 -0.2" rpy = "0 0 3.14" />
+		<axis xyz = "1 0 0" />
+	</joint>
+	
+	<joint name = "joint44" type = "revolute">
+		<parent link = "motor_4" />
+		<child link = "upper_leg4" />
+		<limit upper = "1.6" lower = "-1.6"/>
+		<origin xyz = "0 0.05 -0.2" rpy = "0 0 0" />
+		<axis xyz = "1 0 0" />
+	</joint>
+	
+</robot>
